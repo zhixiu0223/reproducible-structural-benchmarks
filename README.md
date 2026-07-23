@@ -1,5 +1,15 @@
 # reproducible-structural-benchmarks
 
+Public benchmark datasets in structural engineering are increasingly
+released with open data (see the Ziemian & Ziemian frames below). But a
+public dataset being available is not the same as it being independently
+reproducible: this repo's own experience with Frame 1 is that the released
+data alone was *not* sufficient to reproduce the published numbers, and the
+gap was easy to mistake for a modeling error rather than a missing
+methodological detail (see `issues/known-pitfalls.md`). This repo exists to
+make that reproduction process, including the mistakes made along the way,
+checkable by anyone -- not just asserted.
+
 ## This is a challenge, not a claim.
 
 I independently reproduced published steel-frame second-order analysis
@@ -31,10 +41,16 @@ break them:
   one subfolder per independent tool (OpenSeesPy, FRAME3DD, suanPan,
   CalculiX). Each script is runnable standalone against the original
   released dataset.
+- `Frame-01/REPRODUCIBILITY_CHECKLIST.md` -- step-by-step checklist to
+  independently reproduce Frame 1 without reading the full report first.
 - `benchmark-data/` -- pointers to the original released dataset (not
   redistributed here; see below).
 - `issues/known_issues.md` -- gaps I already know about. Check here first
   so you don't waste time re-finding something I've already flagged.
+- `issues/known-pitfalls.md` -- lookup table of specific mistakes to expect
+  while reproducing, keyed by symptom.
+- `.github/ISSUE_TEMPLATE/` -- use "Reproduction result" to report a match
+  *or* a mismatch; both are useful.
 
 ## Original data (not redistributed here)
 
