@@ -2,11 +2,19 @@
 Independent 12-DOF direct stiffness cross-check for Frame 1, used only to
 verify that the FRAME3DD / OpenSeesPy / suanPan / CalculiX models were not
 all sharing a common setup mistake. Single element per member (no
-subdivision), first-order (linear, no P-Delta), perfect geometry.
+subdivision), first-order (linear, no P-Delta), imperfect geometry
+(H/500 = 180/500 = 0.36 in global sway at the eave nodes, matching every
+other tool's model and the original release's tabulated imperfect
+coordinates -- an earlier version of this script used perfect geometry,
+which reproduces a spurious ~3.7% gap against the LA benchmark that is
+unrelated to, and coincidentally close in size to, the CalculiX shear-
+deformation gap discussed in the paper; see git history for that version).
 
 Run with E=29000 to reproduce the initial, too-low mismatch referenced in
 the paper's evidence chain step (3). Run with E=23200 (0.8 * 29000, the
-AISC DAM reduced stiffness) to confirm the corrected value.
+AISC DAM reduced stiffness) to confirm the corrected value, which should
+match the published LA benchmark (node 9: 1.04501 in) to within numerical
+precision.
 """
 import numpy as np
 import sys
@@ -34,7 +42,7 @@ def T_matrix(cx, cy):
     T[0:3, 0:3] = R; T[3:6, 3:6] = R
     return T
 
-nodes = {1: (0, 0), 2: (360, 0), 9: (0, 180), 13: (360, 180)}
+nodes = {1: (0, 0), 2: (360, 0), 9: (0.36, 180), 13: (360.36, 180)}  # H/500 sway imperfection
 dof_map = {1: [0, 1, 2], 2: [3, 4, 5], 9: [6, 7, 8], 13: [9, 10, 11]}
 K = np.zeros((12, 12))
 elems = [(1, 9, Abeam_col, Icol, L_col), (2, 13, Abeam_col, Icol, L_col), (9, 13, Abeam, Ibeam, L_beam)]

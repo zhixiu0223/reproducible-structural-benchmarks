@@ -48,3 +48,17 @@ Confirming, refuting, or extending any of these is genuinely useful.
   independently executed and its output checked against the published
   benchmark values by the author, but the code itself has not yet had a
   human-only, AI-free review pass.
+
+## Resolved
+
+- **Frame 1 hand-calc script used perfect geometry instead of imperfect
+  (H/500 sway).** Found during external review of this repo: the first
+  version of `Frame-01/hand-calc/direct_stiffness_check.py` omitted the
+  H/500 global sway imperfection that every other tool's model includes,
+  producing a spurious ~3.7% gap against the LA benchmark that was
+  coincidentally close in size to the unrelated CalculiX Timoshenko-shear
+  gap discussed in the paper -- a genuine risk of being misread as the same
+  cause. Fixed by adding the imperfect coordinates (node 9: x=0.36 in,
+  node 13: x=360.36 in) to match the imperfect geometry used everywhere
+  else in the reproduction. Corrected script now matches the LA benchmark
+  to <0.001%.
