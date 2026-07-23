@@ -15,10 +15,11 @@ checkable by anyone -- not just asserted.
 I independently reproduced published steel-frame second-order analysis
 benchmarks (Ziemian & Ziemian, 2021, *Data in Brief* / *JCSR*) using four
 open-source FEM tools. I found that the released data alone is *not*
-sufficient to reproduce the published numbers -- an undocumented AISC
-Direct Analysis Method stiffness reduction (0.8E) has to be identified from
-a companion paper and applied, and the released Excel data even contains a
-same-named-but-unreduced decoy material entry.
+sufficient to reproduce the published numbers -- a standard AISC Direct
+Analysis Method stiffness reduction (0.8E), well documented in AISC 360
+itself but absent from this specific released dataset's own description,
+has to be identified from a companion paper and applied, and the released
+Excel data even contains a same-named-but-unreduced decoy material entry.
 
 **Please do not trust my results.** What I actually want is for you to try to
 break them:

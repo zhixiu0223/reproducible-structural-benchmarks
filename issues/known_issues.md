@@ -62,3 +62,12 @@ Confirming, refuting, or extending any of these is genuinely useful.
   node 13: x=360.36 in) to match the imperfect geometry used everywhere
   else in the reproduction. Corrected script now matches the LA benchmark
   to <0.001%.
+- **"Undocumented" was used imprecisely in several places (Abstract, Figure 1
+  caption, Discussion, README).** Found during an independent AI blind-test
+  attempt: AISC 360's Direct Analysis Method 0.8EI reduction is a standard,
+  published provision, not an industry secret -- "undocumented" without
+  qualification risked being read as "unknown to the field" rather than the
+  intended, narrower claim: absent specifically from this dataset's own
+  released description. All four instances rewritten to state explicitly
+  that the provision is standard under AISC 360 but missing from the
+  released data article.
