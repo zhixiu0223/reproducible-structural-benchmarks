@@ -17,6 +17,13 @@ them until you have your own result, or the check is meaningless.
       loads (see PDF for magnitudes)
 - [ ] Run a first-order (linear) static analysis
 
+**Shortcut:** if you're using OpenSeesPy and just want to check your
+result against the published benchmark automatically, `pip install -r
+requirements.txt` then run `Frame-01/openseespy/verify.py` -- it prints a
+published-vs-mine-vs-error% table with PASS/CHECK. Everything below this
+point is what `verify.py` checks for you; do it manually if you're using
+a different tool or want to see each step yourself.
+
 ## First checkpoint
 - [ ] Compare your linear result to the published LA benchmark (node 9
       lateral displacement = 1.04501 in). If you get roughly 20-25% low

@@ -1,3 +1,16 @@
+"""
+Frame 1, OpenSeesPy, corotational second-order model.
+
+This is the original script whose output is what's cited in
+reproduction-report/draft.md's Results table (manual print statements,
+no automatic pass/fail).
+
+If you just want to check whether you can reproduce the published
+benchmark, run `verify.py` in this same folder instead -- it runs the
+same model and prints an automatic published-vs-mine-vs-error% table.
+This script is kept as-is for exact traceability to the paper's reported
+numbers.
+"""
 import openseespy.opensees as ops
 
 ops.wipe()

@@ -8,6 +8,7 @@ import openseespy.opensees as ops
 import csv
 
 PUBLISHED_UX9 = 1.19082
+PUBLISHED_M1 = 2427.99
 
 def run(factor):
     ops.wipe()
@@ -33,22 +34,24 @@ def run(factor):
     ops.integrator('LoadControl', 0.1); ops.analysis('Static')
     for _ in range(10):
         ops.analyze(1)
-    return ops.nodeDisp(9, 1)
+    return ops.nodeDisp(9, 1), ops.eleForce(1)[2]
 
 def main():
     rows = []
-    print(f"{'factor':>8} {'E (ksi)':>10} {'UX9':>10} {'error %':>10}")
+    print(f"{'factor':>8} {'E (ksi)':>10} {'UX9':>10} {'UX9 err%':>10} {'M1':>10} {'M1 err%':>10}")
     for factor in [0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00]:
-        ux9 = run(factor)
-        err = 100 * (ux9 - PUBLISHED_UX9) / PUBLISHED_UX9
-        print(f"{factor:>8.2f} {29000*factor:>10.0f} {ux9:>10.5f} {err:>9.2f}%")
-        rows.append({"factor": factor, "E_ksi": 29000*factor, "UX9": ux9, "error_pct": err})
+        ux9, m1 = run(factor)
+        ux9_err = 100 * (ux9 - PUBLISHED_UX9) / PUBLISHED_UX9
+        m1_err = 100 * (m1 - PUBLISHED_M1) / PUBLISHED_M1
+        print(f"{factor:>8.2f} {29000*factor:>10.0f} {ux9:>10.5f} {ux9_err:>9.2f}% {m1:>10.2f} {m1_err:>9.2f}%")
+        rows.append({"factor": factor, "E_ksi": 29000*factor, "UX9": ux9,
+                      "UX9_error_pct": ux9_err, "M1": m1, "M1_error_pct": m1_err})
 
     with open("sensitivity_results.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["factor","E_ksi","UX9","error_pct"])
+        w = csv.DictWriter(f, fieldnames=["factor","E_ksi","UX9","UX9_error_pct","M1","M1_error_pct"])
         w.writeheader(); w.writerows(rows)
-    best = min(rows, key=lambda r: abs(r["error_pct"]))
-    print(f"\nMinimum |error| at factor = {best['factor']} (E = {best['E_ksi']:.0f} ksi)")
+    best = min(rows, key=lambda r: abs(r["UX9_error_pct"]))
+    print(f"\nMinimum |UX9 error| at factor = {best['factor']} (E = {best['E_ksi']:.0f} ksi)")
 
 if __name__ == "__main__":
     main()
