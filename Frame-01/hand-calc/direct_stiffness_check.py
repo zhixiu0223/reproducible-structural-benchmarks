@@ -66,6 +66,16 @@ F[dof_map[13][1]] = -348.49
 
 u = np.linalg.solve(K[np.ix_(free, free)], F[free])
 result = dict(zip(free, u))
+print(f"[FIRST-ORDER LINEAR CHECK, not the WC second-order benchmark]")
 print(f"E = {E} ksi")
 print(f"Node 9  X-disp = {result[dof_map[9][0]]:.6f} in")
 print(f"Node 13 X-disp = {result[dof_map[13][0]]:.6f} in")
+if abs(E - 23200.0) < 1.0:
+    print("-> compare against published LA benchmark: node 9 = 1.04501 in, node 13 = 1.01902 in")
+elif abs(E - 29000.0) < 1.0:
+    print("-> this is the UNCORRECTED (nominal E) run; expect ~20-25% low vs the LA benchmark above")
+print("Note: this script checks the LA (first-order) benchmark only. It is")
+print("NOT comparable to verify.py's output, which checks the WC (second-order,")
+print("corotational, geometrically nonlinear) benchmark -- different analysis type,")
+print("different published reference numbers. Do not put both in the same table")
+print("without labeling which is which.")

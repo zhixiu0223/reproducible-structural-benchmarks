@@ -97,3 +97,41 @@ Confirming, refuting, or extending any of these is genuinely useful.
   second-order ones -- now Pitfall 6 in `known-pitfalls.md`. This is
   disclosed as an AI blind-test data point, not third-party human
   validation; see the corresponding GitHub issue for full detail.
+
+## External validation (update 2)
+
+- **AI blind-test capability varies widely across agents -- corrected
+  after over-claiming uniformity in an earlier version of this note.**
+  Attempts against this repo, informally, across several AI systems:
+  - **This repo's own dev environment (Claude, with full sandbox/network
+    access):** all four tools (FRAME3DD compiled from source, suanPan
+    prebuilt binary, CalculiX via system package, OpenSeesPy via pip) run
+    successfully. This is the only environment confirmed to run the full
+    cross-validation.
+  - **A separate Claude instance (blind test, see earlier entry above):**
+    built its own independent OpenSeesPy + hand-calc models successfully;
+    did not attempt FRAME3DD/suanPan/CalculiX before the session ended, so
+    its capability ceiling on those is untested, not confirmed absent.
+  - **Grok:** independently installed and ran the OpenSeesPy path
+    (`verify.py`, `sensitivity_study.py`) with a real solver, matching
+    published results to <0.2%. Did not attempt the other three tools
+    (likely a genuine sandbox limitation -- no compiler/binary available
+    -- but this was not independently confirmed, only inferred).
+  - **DeepSeek, Qwen, Gemini:** reported only manual/hand-calculated
+    Python checks (direct-stiffness-style arithmetic), not execution of
+    an actual FEM solver package.
+  - **ChatGPT:** repeatedly proposed strategy and workflow descriptions
+    but did not report actually executing any code against this repo.
+
+  The corrected takeaway: OpenSeesPy's pip-installable wheel is the most
+  portable *real solver* path across agents that can execute code at all
+  -- this is a reasonable practical default for a Quick Start, but it is
+  not evidence that "no sandbox can run the other three tools" (only one
+  agent, Grok, actually demonstrated a ceiling, and even that wasn't
+  confirmed as a hard limitation rather than simply not being attempted).
+- **Process note:** when reporting results from `Frame-01/hand-calc/`
+  alongside `verify.py`, keep them in separate tables -- they check
+  different published benchmarks (LA, first-order vs. WC, second-order)
+  and are not directly comparable numbers. The hand-calc script's output
+  now prints this warning explicitly to reduce the chance of an external
+  reviewer (human or AI) merging them into one misleading table.

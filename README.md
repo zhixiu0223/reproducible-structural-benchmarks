@@ -24,6 +24,36 @@ Excel data even contains a same-named-but-unreduced decoy material entry.
 **Please do not trust my results.** What I actually want is for you to try to
 break them:
 
+## Quick start (works in most sandboxes, including AI agents)
+
+```
+pip install -r requirements.txt
+python Frame-01/openseespy/verify.py
+```
+
+This is deliberately the easy path: this repo's own dev environment can
+build and run all four tools (see `BUILD.md`), but AI-agent blind-test
+attempts against this repo have shown a wide range of actual execution
+capability -- one agent (Grok) independently installed and ran the
+OpenSeesPy path with a real solver; several others (DeepSeek, Qwen,
+Gemini) could only produce a manual/hand-calculated Python check without
+an actual FEM solver; one (ChatGPT) proposed strategy repeatedly but never
+executed anything. OpenSeesPy's pip-installable wheel appears to be the
+most portable *real solver* path across agents that can execute code at
+all -- not a universal ceiling every sandbox hits, just the best
+default starting point given that spread. See
+`issues/known_issues.md`, "External validation", for the itemized
+breakdown per agent.
+
+## Advanced: independent solver cross-validation
+
+If you have FRAME3DD, suanPan, and/or CalculiX available (see `BUILD.md`
+for exact build steps), the corresponding scripts in each frame's
+subfolder let you cross-check the same benchmark across four independent
+implementations, which is the paper's actual central claim -- the
+OpenSeesPy-only quick start above is a fast sanity check, not a
+substitute for that cross-validation.
+
 1. Build your own independent model of one of the frames below (from the
    original public dataset, not from my scripts).
 2. Try to reproduce the published benchmark numbers.
