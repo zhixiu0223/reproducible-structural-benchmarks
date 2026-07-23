@@ -71,3 +71,29 @@ Confirming, refuting, or extending any of these is genuinely useful.
   released description. All four instances rewritten to state explicitly
   that the provision is standard under AISC 360 but missing from the
   released data article.
+
+## Deferred (not forgotten)
+
+- **Dockerfile / one-command setup.sh, CI.** `BUILD.md` documents exact
+  versions and manual build commands for all four tools. Not yet packaged
+  as a single automated script or container, and not yet wired into CI.
+  Deferred because the tool mix (source-built FRAME3DD, a large suanPan
+  binary, CalculiX, OpenSeesPy) makes a correct Dockerfile nontrivial, and
+  this repo has not yet had enough external feedback to be confident the
+  scope (which frames, which tools) is stable enough to be worth that
+  investment yet. Revisit once Frame 4/9 reach Frame 1's coverage level.
+
+## External validation
+
+- **Independent AI blind-reproduction (same author's account, separate
+  conversation instructed not to search prior chat history or read this
+  repo's own scripts before building its own model).** Confirmed
+  independently: (1) the ~20-25% low first attempt using unreduced
+  stiffness, (2) the decoy "A36 (DAM)" material entry in the Excel file,
+  (3) the corrected WC benchmark match (<0.2% on displacement and moment,
+  using a from-scratch corotational OpenSeesPy model). Also independently
+  found and resolved a new pitfall not previously documented: first-order
+  (LA) results also require the imperfect (H/500) geometry, not just the
+  second-order ones -- now Pitfall 6 in `known-pitfalls.md`. This is
+  disclosed as an AI blind-test data point, not third-party human
+  validation; see the corresponding GitHub issue for full detail.

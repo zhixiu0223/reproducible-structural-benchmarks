@@ -55,6 +55,27 @@ this element type, and the workaround (duplicate coincident node + partial
 constraint) is easy to get wrong.
 **Fix:** see `Frame-04/openseespy/frame4_wc.py` for a worked example.
 
+## Pitfall 6: first-order (LA) results also need the imperfect geometry
+**Symptom:** your first-order (linear, no P-Delta) member moments don't
+match the published LA benchmark, and -- this is the confusing part --
+changing between nominal E (29,000 ksi) and DAM-reduced E (23,200 ksi)
+makes *no difference at all* to the moment you get.
+**Cause:** the "no difference" observation is not a bug in your code --
+it's mathematically correct. In a first-order linear-elastic analysis,
+member moments in a statically indeterminate frame depend only on the
+*relative* EI ratios between members, not on the absolute value of E, as
+long as every member is scaled by the same factor. So Pitfall 1's fix
+(0.8E) genuinely cannot be the explanation for a first-order moment
+mismatch. The actual cause is more mundane and easy to miss on a from-
+scratch model built specifically to isolate the first-order case: the
+H/500 global sway imperfection has to be included even for the first-order
+benchmark, not just the second-order one. Without it, base moment comes
+out to 2094.98 kip-in (independent of E); with it, 2177.81 kip-in,
+matching the published LA benchmark for Frame 1 to <0.001% (independent of
+E, as expected).
+**Fix:** use the imperfect coordinates for every analysis type (LA, SIPC,
+WC), not just the second-order ones.
+
 ---
 If you hit something not on this list, please open an issue -- that's
 exactly what this list is missing until someone finds it.

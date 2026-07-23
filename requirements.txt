@@ -1,0 +1,4 @@
+# Python dependencies for the OpenSeesPy and hand-calc scripts in this repo.
+# Tested with Python 3.12.3.
+openseespy==3.8.0.0
+numpy==2.4.4

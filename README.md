@@ -52,6 +52,24 @@ break them:
   while reproducing, keyed by symptom.
 - `.github/ISSUE_TEMPLATE/` -- use "Reproduction result" to report a match
   *or* a mismatch; both are useful.
+- `requirements.txt`, `BUILD.md` -- exact Python/tool versions and build
+  commands actually used (FRAME3DD built from source, suanPan pre-built
+  release binary, CalculiX via `apt`, OpenSeesPy via `pip`).
+- `Frame-01/openseespy/verify.py` -- runs the model and prints a
+  published-vs-mine-vs-error% table automatically (PASS/CHECK).
+- `Frame-01/openseespy/sensitivity_study.py` -- sweeps the stiffness
+  reduction factor from 0.70E to 1.00E and confirms 0.80E is the actual
+  error-minimizing value, not just "close enough."
+
+**Not yet done:** a single `setup.sh` / Dockerfile that builds all four
+tools in one command, and CI that runs `verify.py` automatically on every
+push. Deliberately deferred rather than skipped -- see
+`issues/known_issues.md` for the reasoning (mainly: the tool mix here is
+unusually heavy -- a compiled-from-source FRAME3DD, a large suanPan
+binary, and CalculiX -- and getting a Dockerfile right for all four before
+this repo has had any real external feedback risks a lot of maintenance
+overhead on infrastructure for a project whose scope might still change).
+Contributions welcome.
 
 ## Original data (not redistributed here)
 
