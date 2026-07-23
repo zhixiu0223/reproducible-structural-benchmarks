@@ -1,0 +1,79 @@
+Ziemian & Ziemian (2021) Benchmark Frame 1: Single-story portal frame (kip, in)
+
+13				# number of nodes
+#.node	x	y	z	r
+ 1	0	0	0	0.0
+ 2	360	0	0	0.0
+ 3	0.09	45	0	0.0
+ 4	360.09	45	0	0.0
+ 5	0.18	90	0	0.0
+ 6	360.18	90	0	0.0
+ 7	0.27	135	0	0.0
+ 8	360.27	135	0	0.0
+ 9	0.36	180	0	0.0
+ 10	90.36	180	0	0.0
+ 11	180.36	180	0	0.0
+ 12	270.36	180	0	0.0
+ 13	360.36	180	0	0.0
+
+13				# number of nodes with reactions
+#.n	x y z xx yy zz		1=fixed, 0=free
+  1	1 1 1  1  1  1
+  2	1 1 1  1  1  1
+  3	0 0 1  1  1  0
+  4	0 0 1  1  1  0
+  5	0 0 1  1  1  0
+  6	0 0 1  1  1  0
+  7	0 0 1  1  1  0
+  8	0 0 1  1  1  0
+  9	0 0 1  1  1  0
+ 10	0 0 1  1  1  0
+ 11	0 0 1  1  1  0
+ 12	0 0 1  1  1  0
+ 13	0 0 1  1  1  0
+
+12				# number of frame elements
+#e	n1 n2	Ax	Asy	Asz	Jxx	Iyy	Izz	E	G	roll	density
+#. W14X68 columns (Sec 1): Ax=20 Iyy=121 Izz=722 Jxx=3.01
+#. W18X35 beam    (Sec 2): Ax=10.3 Iyy=15.3 Izz=510 Jxx=0.506
+#. E=29000 ksi  G=E/2.6=11153.85 ksi (v=0.3)
+ 1	1  3	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+ 2	3  5	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+ 3	5  7	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+ 4	7  9	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+ 5	9  10	10.3	10.3	10.3	0.506	15.3	510.0	23200	8923.08	0	7.33e-7
+ 6	10 11	10.3	10.3	10.3	0.506	15.3	510.0	23200	8923.08	0	7.33e-7
+ 7	11 12	10.3	10.3	10.3	0.506	15.3	510.0	23200	8923.08	0	7.33e-7
+ 8	12 13	10.3	10.3	10.3	0.506	15.3	510.0	23200	8923.08	0	7.33e-7
+ 9	2  4	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+10	4  6	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+11	6  8	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+12	8  13	20.0	20.0	20.0	3.01	121.0	722.0	23200	8923.08	0	7.33e-7
+
+0		# 1: include shear deformation
+1		# 1: include geometric stiffness (second-order P-Delta)
+50.0		# exaggerate mesh deformations
+1.0		# zoom scale for 3D plotting
+-1.0		# x-axis increment for internal forces (-1 = skip)
+
+1				# number of static load cases
+					# Begin Static Load Case 1 of 1
+# gravitational acceleration for self-weight loading (global)
+#.gX		gY		gZ
+  0		0		0
+
+2				# number of loaded nodes
+#.n	Fx	Fy	Fz	Mxx	Myy	Mzz
+ 9	34.849	-348.49	0.0	0.0	0.0	0.0
+13	0.0	-348.49	0.0	0.0	0.0	0.0
+
+0				# number of uniform loads
+0				# number of trapezoidal loads
+0				# number of internal concentrated loads
+0				# number of temperature loads
+0				# number of nodes with prescribed displacements
+					# End Static Load Case 1 of 1
+
+0				# number of dynamic modes
+
+# End of input data file

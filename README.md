@@ -1,0 +1,51 @@
+# reproducible-structural-benchmarks
+
+## This is a challenge, not a claim.
+
+I independently reproduced published steel-frame second-order analysis
+benchmarks (Ziemian & Ziemian, 2021, *Data in Brief* / *JCSR*) using four
+open-source FEM tools. I found that the released data alone is *not*
+sufficient to reproduce the published numbers -- an undocumented AISC
+Direct Analysis Method stiffness reduction (0.8E) has to be identified from
+a companion paper and applied, and the released Excel data even contains a
+same-named-but-unreduced decoy material entry.
+
+**Please do not trust my results.** What I actually want is for you to try to
+break them:
+
+1. Build your own independent model of one of the frames below (from the
+   original public dataset, not from my scripts).
+2. Try to reproduce the published benchmark numbers.
+3. See if you get the same ~20-25% low result I got on a first attempt, and
+   whether you find the same explanation (or a different one).
+4. If anything in my evidence chain, my code, or my conclusions looks wrong,
+   **please open an issue.** Finding a real problem is the useful outcome
+   here, not a thumbs-up.
+
+## What's in this repo
+
+- `reproduction-report/draft.md` -- the current draft write-up (ReScience C
+  format), including the full evidence chain for the stiffness-reduction
+  finding.
+- `Frame-01/`, `Frame-04/`, `Frame-09/` -- per-frame reproduction scripts,
+  one subfolder per independent tool (OpenSeesPy, FRAME3DD, suanPan,
+  CalculiX). Each script is runnable standalone against the original
+  released dataset.
+- `benchmark-data/` -- pointers to the original released dataset (not
+  redistributed here; see below).
+- `issues/known_issues.md` -- gaps I already know about. Check here first
+  so you don't waste time re-finding something I've already flagged.
+
+## Original data (not redistributed here)
+
+Ziemian, C.W., Ziemian, R.D. (2021). Benchmark Frames for Structural
+Analysis. Mendeley Data, v1. https://doi.org/10.17632/39sjhchwtx.1
+(CC BY 4.0). Download the "Description of Frames" PDF and "FEA Model
+Details" Excel file directly from that link if you want to build your own
+model from scratch, independent of anything in this repo.
+
+## Status
+
+Draft. Not yet submitted anywhere. Frame 1 is the most thoroughly checked
+(four tools, both first- and second-order comparisons). Frame 4 and Frame 9
+are partial (see `issues/known_issues.md`).
