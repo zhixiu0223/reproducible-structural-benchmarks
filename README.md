@@ -26,6 +26,11 @@ break them:
 
 ## Quick start (works in most sandboxes, including AI agents)
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zhixiu0223/reproducible-structural-benchmarks/blob/main/colab/frame01_quick_reproduction.ipynb)
+
+Click the badge above for a zero-install, one-click reproduction (Colab
+installs OpenSeesPy itself). Or locally:
+
 ```
 pip install -r requirements.txt
 python Frame-01/openseespy/verify.py
