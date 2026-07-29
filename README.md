@@ -1,5 +1,10 @@
 # reproducible-structural-benchmarks
 
+<!-- TODO after the next successful Zenodo release: replace this line with
+     the real badge, e.g.
+     [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+     Get the exact markdown from the Zenodo record page once the DOI exists. -->
+
 Public benchmark datasets in structural engineering are increasingly
 released with open data (see the Ziemian & Ziemian frames below). But a
 public dataset being available is not the same as it being independently
